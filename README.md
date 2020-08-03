@@ -41,4 +41,4 @@
 \- [Vue CLI 공식 문서](https://cli.vuejs.org/)
 
 
-정리 문서
+[정리 문서](https://github.com/LenKIM/vue-study/blob/master/Vue%20%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0.md)
