@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{ num }}
+    <button v-on:click="addNum">increase</button>
+</div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10
+            },
+            watch: {
+                //num 의 상태가 바뀔때마다 실행된다.
+                num: function () {
+                    this.logText()
+                }
+            },
+            methods:{
+                addNum: function () {
+                    this.num = this.num + 1
+                },
+                logText: function () {
+                    console.log("log changed")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

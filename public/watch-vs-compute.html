@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{ num }}
+    <button v-on:click="addNum">increase</button>
+</div>
+<script src="https://unpkg.com/vue"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            num: 10
+        },
+        computed: {
+            //데이터의 의존성이 달려있다. 벨리데이션, 간단 연산 로직
+            doubleNum: function () {
+                return this.num * 2
+            }
+        },
+        watch: {
+            // 무거운 로직을 실행할 경우 watch를 실행한다.
+            //num 의 상태가 바뀔때마다 실행된다.
+            num: function (newValue, oldValue) {
+                this.fetchUserByNumber(newValue);
+            }
+        },
+        methods: {
+            fetchUserByNumber: function(num){
+                console.log(num)
+            },
+            addNum: function () {
+                this.num = this.num + 1
+            },
+            logText: function () {
+                console.log("log changed")
+            }
+        }
+    })
+</script>
+</body>
+</html>

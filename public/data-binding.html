@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:id="uuid">{{ num }}</p>
+        <p v-bind:class="name">{{ doubleNum }}</p>
+        <div v-if="loading">Loading...</div> DOM을 완전 제거
+        <div v-else>test user has been logged in</div>
+        <div v-show="loading">Loading.....</div> DOM을 CSS로 변경
+
+        <input type="text" v-model="message">
+        <p>{{ message   }}</p>
+        <p></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                str: 'hi',
+                num: 10,
+                uuid: 'abc1234',
+                name: "className",
+                loading: true,
+                message: ""
+            },
+            computed: { // data의 데이터를 재활용할 때 사용할 수 있다.
+                doubleNum: function () {
+                    return this.num * 2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

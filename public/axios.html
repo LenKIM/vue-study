@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<body>
+<div id="app">
+    <button v-on:click="getData">get user</button>
+    <div>
+        적용되어진 {{ users }}
+    </div>
+</div>
+<div>
+    적용되어 지지 않은 {{ users }}
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            users: []
+        },
+        methods: {
+            getData: function () {
+                // 1. this
+                var vm = this;
+                axios.get('https://jsonplaceholder.typicode.com/todos')
+                    .then(function (response) {
+                        console.log(response.data)
+                        vm.users = response.data;
+                        // 2. 이 안에 this는 비동기 처리에 해당하는 부분에 해당한다.
+                    }).catch(function (error) {
+                    console.log(error)
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

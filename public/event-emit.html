@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--        <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이="상위 컴포넌트 이벤트 이름"></app-header>-->
+    <p>{{ num }}</p>
+    <app-header v-on:pass="logText"></app-header>
+    <app-content v-on:increase="increaseNumber"></app-content>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    var appHeader = {
+        template: '<button v-on:click="passEvent">click me</button>',
+        methods: {
+            passEvent: function () {
+                this.$emit('pass')
+            }
+//하위 컴포넌트에서 pass라는 이벤트가 emit 되면 상위 컴포넌트가 pass를 잡고 logText를 실행한다.
+        }
+    }
+    var appContent = {
+        template: '<button v-on:click="addNumber">add</button>',
+        methods: {
+            addNumber: function () {
+                this.$emit('increase')
+            }
+        }
+    }
+    new Vue({
+        el: '#app',
+        components: {
+            'app-header': appHeader,
+            'app-content': appContent
+        },
+        methods: {
+            logText: function () {
+                console.log('Hi')
+            },
+            increaseNumber: function () {
+                this.num = this.num + 1;
+            }
+        },
+        data: {
+            num: 10
+        }
+    });
+</script>
+</body>
+</html>
