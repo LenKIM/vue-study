@@ -244,7 +244,7 @@ var p = new Person('josh', 'dev')
 
 ![image-20200731134307482](https://tva1.sinaimg.cn/large/007S8ZIlgy1gha200yuovj30fv0bkq3d.jpg)
 
-![image-20200731134520159](/Users/len/Library/Application Support/typora-user-images/image-20200731134520159.png)
+![image-20200731134520159](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghdifggogrj30f20aujrr.jpg)
 
 내려가는 데이터는 `Props` 라는 이름으로 내려간다.
 
