@@ -1,50 +1,45 @@
 <template>
-    <form v-on:submit="submitForm">
-        <div>
-            <label for="username">id: </label>
-            <input id="username" type="text" v-model="username">
-        </div>
-        <div>
-            <label for="password">pw: </label>
-            <input id="password" type="password" v-model="password">
-        </div>
-        <button type="submit">login</button>
-    </form>
+  <div id="app">
+    <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
+  </div>
 </template>
 
 <script>
-    import axios from 'axios';
+import TodoHeader from "./components/TodoHeader.vue";
+import TodoInput from "./components/TodoInput.vue";
+import TodoList from "./components/TodoList.vue";
+import TodoFooter from "./components/TodoFooter";
 
-    export default {
-        data: function () {
-            return {
-                username: '',
-                password: '',
-            }
-        },
-        name: "App",
-        methods: {
-            submitForm: function () {
-                // 새로 고침을 막을 수 있음. 버블링을 막음.
-                // event.preventDefault();
-                // console.log(this.username, this.password)
-                var url = 'https://jsonplaceholder.typicode.com/users'
-                var data = {
-                    username: this.username,
-                    password: this.password
-                }
-                axios.post(url, data)
-                    .then(function (response) {
-                        console.log(response)
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })
-            }
-        }
-    }
+export default {
+  components: {
+    // '컴포넌티 이름': 컴포넌트 내용
+    TodoHeader: TodoHeader,
+    TodoInput: TodoInput,
+    TodoList: TodoList,
+    TodoFooter: TodoFooter,
+  },
+};
 </script>
 
-<style scoped>
+<style>
+body {
+  text-align: center;
+  background-color: wheat;
+}
+
+input {
+  border-style: groove;
+  width: 200px;
+}
+
+button {
+  border-style: groove;
+}
+.shadow {
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
+}
 
 </style>
