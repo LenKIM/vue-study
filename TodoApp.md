@@ -140,3 +140,32 @@ https://kr.vuejs.org/v2/examples/modal.html
 간단 이펙트를 바로바로 추가할 수 있다.
 
 https://kr.vuejs.org/v2/guide/transitions.html
+
+
+
+
+
+## Enhanced Object Literals
+
+![image-20200807131450372](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghi4it2stsj30mi0cptc0.jpg)
+
+좋은 점?
+
+() 하나로 메소드 역할을 만들어낼 수 있다.
+
+
+
+![image-20200807132040502](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghi4oti8euj30qk07vwfl.jpg)
+
+![image-20200807132301968](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghi4ra4gw0j30qk0bv0vq.jpg)
+
+왜 Modules를 써야 하는가?
+
+![image-20200807132721158](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghi4vs4vylj30qf0cyn02.jpg)
+
+한 개의 파일에서 하나만 `export` 된다. 
+
+## Vuex - 상태 관리 라이브러리
+
+
+

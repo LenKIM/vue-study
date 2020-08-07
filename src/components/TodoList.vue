@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-<!--      name은 클래스와 연관이 되어있다.-->
+      <!--      name은 클래스와 연관이 되어있다.-->
       <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
         <i class="checkBtn fas fa-check"
            v-bind:class="{checkBtnCompleted: todoItem.completed}"
@@ -19,10 +19,10 @@
 export default {
   props: ["propsdata"],
   methods: {
-    removeTodo: function (todoItem, index) {
+    removeTodo(todoItem, index) {
       this.$emit('removeItem', todoItem, index)
     },
-    toggleComplete: function (todoItem, index) {
+    toggleComplete(todoItem, index) {
       this.$emit('toggleItem', todoItem, index)
     }
   }
@@ -74,10 +74,13 @@ li {
   display: inline-block;
   margin-right: 10px;
 }
+
 .list-enter-active, .list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */
+{
   opacity: 0;
   transform: translateY(30px);
 }

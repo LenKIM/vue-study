@@ -14,13 +14,13 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 
-    var appHeader = {
+    const appHeader = {
         template: '<div>header</div>',
         props: ['propsdata']
 
-    }
+    };
 
-    var appContent = {
+    const appContent = {
         template: '<div>appContent<button v-on:click="passNum">pass</button></div>',
         methods: {
             passNum: function () {
@@ -28,7 +28,7 @@
             }
         }
 
-    }
+    };
 
     new Vue({
         el: '#app',
