@@ -19,31 +19,31 @@ import TodoFooter from "./components/TodoFooter";
 
 export default {
   methods: {
-    addOneItem: function (todoItem) {
-      var obj = {completed: false, item: todoItem};
+    addOneItem(todoItem) {
+      const obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj))
       this.todoItems.push(obj)
     },
-    removeOneItem: function (todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item)
       this.todoItems.splice(index, 1)
     },
-    toggleOneItem: function (todoItem, index) {
+    toggleOneItem(todoItem, index) {
       this.todoItems[index].completed = !this.todoItems[index].completed
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
     },
-    clearAllItems: function () {
+    clearAllItems() {
       localStorage.clear();
       this.todoItems = [];
     }
   },
-  data: function () {
+  data() {
     return {
       todoItems: []
     }
   },
-  created: function () {
+  created() {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
@@ -52,12 +52,19 @@ export default {
       }
     }
   },
+  // components: {
+  //   // '컴포넌티 이름': 컴포넌트 내용
+  //   TodoHeader: TodoHeader,
+  //   TodoInput: TodoInput,
+  //   TodoList: TodoList,
+  //   TodoFooter: TodoFooter,
+  // },
   components: {
     // '컴포넌티 이름': 컴포넌트 내용
-    TodoHeader: TodoHeader,
-    TodoInput: TodoInput,
-    TodoList: TodoList,
-    TodoFooter: TodoFooter,
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter,
   },
 };
 </script>
