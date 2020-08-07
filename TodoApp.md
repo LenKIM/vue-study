@@ -35,3 +35,16 @@ src > components > component
 
 
 `TodoHeader` 개발 후 `TodoInput` 구현함.
+
+
+
+![image-20200806135656566](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghh04ayegyj30gj0bq76n.jpg)
+
+
+
+`localstorage` 로 구현시 문제점.
+
+그러므로 아래와 같이 해결한다.
+
+![image-20200806135752079](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghh057tm9cj30en0dtjt6.jpg)
+
