@@ -156,3 +156,183 @@ actions에서 mutations를 접근할 수 있습니다. 접근하기 위한 경�
 
 ![image-20200810111653986](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghlhyyjufdj30pu0edtc6.jpg)
 
+---
+
+# Helper
+
+
+
+어플리케이션이 커질때  모듈화를 어떻게 할 것인지???
+
+![image-20200810112403517](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghli6esgqrj30oy0btjte.jpg)
+
+![image-20200810112536450](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghli81h5drj30qk0cw0x5.jpg)
+
+컴포넌트 로직단에서 사용할 수 있는가?
+
+```
+...mapState(['num'])  = this.$store.state.num
+
+...mapGetters(['countedNum']) = this.$store.getters.countedNum
+
+...
+
+...mapMutations(['clickBtn']) = this.$store.mutations.clickBtn
+```
+
+
+
+## mapstate, mapGetters 소개, 왜 spread 연산자를 사용하는지?
+
+![image-20200810113417866](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghlih25rwzj30qg0dyn06.jpg)
+
+![image-20200810113628423](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghlijbtt0hj30qp0d2zo3.jpg)
+
+왜 spread 연산자를 쓰는걸까?
+
+원래 computed 속성이 있다. 고유의 컴퓨티드 속성을 써야 할 때가 많다.
+
+기존의 computed와 mapGetters 를 한꺼번에 쓰기 위해서 사용된다.
+
+
+
+### 리펙토링
+
+1. getters로 접근하게 코드 수정 (다시 살펴보기) - this.storedTodoItems
+
+
+
+![image-20200810114828681](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghlivtageyj30qa0eewi6.jpg)
+
+![image-20200810115026653](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghlixv74q6j30n20dd77v.jpg)
+
+
+
+헬퍼의 유연한 문법
+
+![image-20200810115118641](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghliyrg7b0j30q10axtbo.jpg)
+
+
+
+**리펙토링은 어떻게 했는가?**
+
+mapGetters, mapMutations 를 리팩토링 한다.
+
+```vue
+import { mapGetters, mapMutations } from 'vuex'
+
+export default {
+  methods: {
+    ...mapMutations({
+      removeTodo: 'removeOneItem',
+      //Payload 는 ??? 암묵적으로 html에서  넘겼다.
+      toggleComplete: 'toggleOneItem'
+
+    }),
+    // removeTodo(todoItem, index) {
+    //   this.$store.commit('removeOneItem', {todoItem, index});
+    // },
+    // toggleComplete(todoItem, index) {
+    //   this.$store.commit('toggleOneItem', {todoItem, index});
+    // }
+  },
+  computed: {
+    // todoItems(){
+    //   // 모두다 처리하고 깔끔하게 보이게 하는 것이 Vue의 의도이다.
+    //   return this.$store.getters.storedTodoItems
+    // }
+    ...mapGetters(['storedTodoItems'])
+  }
+}
+</script>
+
+```
+
+
+
+```vue
+import { mapMutations } from 'vuex'
+
+methods: {
+  ...mapMutations({
+    clearTodo: 'clearAllItems'
+  }),
+  // clearTodo: function (){
+  //   this.$store.commit('clearAllItems')
+  // }
+}
+```
+
+`mapMutations` 으로 바로 넘김.
+
+
+
+### 헬퍼 함수가 주는 간편함?
+
+
+
+```vue
+//Demo.vue
+<template>
+  <div id="root">
+    <p>{{ originalPrice }}</p> 100
+    <p>{{ doublePrice }}</p> 200
+    <p>{{ triplePrice }}</p> 300
+    권고되는 사항은 심플하게 코드되는 것
+  </div>
+</template>
+
+<script>
+import  { mapGetters } from 'vuex'
+export default {
+  name: "Demo",
+  computed: {
+    ...mapGetters(['originalPrice', 'doublePrice', 'triplePrice']),
+    // 한번에 매핑시켜주는 효과를 가져다 준다.
+
+    // originalPrice() {
+    //   return this.$store.getters.originalPrice
+    // },
+    // doublePrice() {
+    //   return this.$store.getters.doublePrice
+    // },
+    // triplePrice() {
+    //   return this.$store.getters.triplePrice
+    // }
+  // computed 를 쓰지 않고 바로 접근할 경우 HTML 에서 길게 작성해야 할것이다.
+  //
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+```vue
+//DemoStore.js
+
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
+    state: {
+        price: 100
+    },
+    getters: {
+        originalPrice(state){
+            return state.price
+        },
+        doublePrice(state){
+            return state.price * 2;
+        },
+        triplePrice(state){
+            return state.price * 3;
+        }
+    }
+})
+```
+

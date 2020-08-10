@@ -2,12 +2,13 @@
   <div>
     <transition-group name="list" tag="ul">
       <!--      name은 클래스와 연관이 되어있다.-->
-      <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
+<!--      <li v-for="(todoItem, index) in this.todoItems" v-bind:key="todoItem.item" class="shadow">-->
+      <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
         <i class="checkBtn fas fa-check"
            v-bind:class="{checkBtnCompleted: todoItem.completed}"
-           v-on:click="toggleComplete(todoItem, index)"></i>
+           v-on:click="toggleComplete({todoItem, index})"></i>
         <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -16,14 +17,29 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      this.$store.commit('removeOneItem', {todoItem, index});
-    },
-    toggleComplete(todoItem, index) {
-      this.$store.commit('toggleOneItem', {todoItem, index});
-    }
+    ...mapMutations({
+      removeTodo: 'removeOneItem',
+      //Payload 는 ??? 암묵적으로 html에서  넘겼다.
+      toggleComplete: 'toggleOneItem'
+
+    }),
+    // removeTodo(todoItem, index) {
+    //   this.$store.commit('removeOneItem', {todoItem, index});
+    // },
+    // toggleComplete(todoItem, index) {
+    //   this.$store.commit('toggleOneItem', {todoItem, index});
+    // }
+  },
+  computed: {
+    // todoItems(){
+    //   // 모두다 처리하고 깔끔하게 보이게 하는 것이 Vue의 의도이다.
+    //   return this.$store.getters.storedTodoItems
+    // }
+    ...mapGetters(['storedTodoItems'])
   }
 }
 </script>
