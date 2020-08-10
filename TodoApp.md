@@ -144,7 +144,6 @@ https://kr.vuejs.org/v2/guide/transitions.html
 
 
 
-
 ## Enhanced Object Literals
 
 ![image-20200807131450372](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghi4it2stsj30mi0cptc0.jpg)
@@ -164,8 +163,3 @@ https://kr.vuejs.org/v2/guide/transitions.html
 ![image-20200807132721158](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghi4vs4vylj30qf0cyn02.jpg)
 
 한 개의 파일에서 하나만 `export` 된다. 
-
-## Vuex - 상태 관리 라이브러리
-
-
-
