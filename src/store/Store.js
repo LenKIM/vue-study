@@ -20,6 +20,11 @@ export const store = new Vuex.Store({
     state: {
         todoItems: storage.fetch() //관리하고 싶은 아이템을 등록한다?
     },
+    getters: {
+      storedTodoItems(state){
+          return state.todoItems;
+      }
+    },
     mutations: {
         addOneItem(state, todoItem) {
             const obj = {completed: false, item: todoItem};
